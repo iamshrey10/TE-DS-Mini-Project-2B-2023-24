@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <!-- Link to Blaze UI CSS CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/@blaze/css@x.x.x/dist/blaze/blaze.css">
+</head>
+<body>
+    <div class="o-container o-container--medium u-center-block">
+        <div class="c-card">
+            <header class="c-card__header">
+                <h2 class="c-heading">Chatbot</h2>
+            </header>
+            <div class="c-card__body">
+                <div id="chatbox" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+                    {% if response %}
+                        {% for res in response %}
+                            <p><strong>Bot:</strong> {{ res }} <small>{{ res.time }}</small></p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <form id="chatform" method="post">
+                    <div class="c-field">
+                        <label class="c-label">Enter your message:</label>
+                        <input type="text" class="c-input" id="chatinput" name="prompt">
+                    </div>
+                    <button type="submit" class="c-button c-button--brand">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

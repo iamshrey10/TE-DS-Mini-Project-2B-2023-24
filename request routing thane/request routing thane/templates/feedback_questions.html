@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Feedback Questions</h1>
+        <form id="feedbackForm" action="/submit_feedback" method="POST">
+            {% for question in feedback_questions %}
+            <p>{{ question }}</p>
+            <select name="Q{{ loop.index }}" required>
+                <option value="1">1 (Very Dissatisfied)</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5 (Very Satisfied)</option>
+            </select>
+            {% endfor %}
+            <p>Any additional comments or suggestions?</p>
+            <textarea name="suggestions" rows="4" cols="50"></textarea>
+            <br><br>
+            <input id="submitButton" type="submit" value="Submit Feedback">
+        </form>
+    </div>
+
+    <!-- Script for displaying thank you message -->
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            alert('Thank you for your feedback!'); // Display thank you message
+            // Optionally, you can reset the form here if needed
+            // this.reset();
+        });
+    </script>
+</body>
+</html>

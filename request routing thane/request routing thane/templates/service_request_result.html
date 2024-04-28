@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-info {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .result-info h3 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        .result-info p {
+            color: #555;
+        }
+
+        .back-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-button a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Service Request Result</h1>
+        <div class="result-info">
+            <h3>Area Name: {{ area_name }}</h3>
+            <p>Service Type: {{ service_type }}</p>
+            <p>Department Address: {{ dept_address }}</p>
+            <p>Estimated Time: {{ estimated_time }}</p>
+        </div>
+        <div class="back-button">
+            <a href="/">Go back to Service Request Form</a>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 10 5' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 0L10 5H0z' fill='%23000'/%3E%3C/svg%3E");
+            background-size: 10px 5px;
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            padding-right: 30px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Service Request Form</h1>
+        <form action="/service_request" method="post">
+            <label for="area_name">Area Name:</label>
+            <input type="text" id="area_name" name="area_name">
+            <label for="service_address">Service Address:</label>
+            <input type="text" id="service_address" name="service_address">
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <label for="service_type">Service Type:</label>
+            <select id="service_type" name="service_type">
+                <option value="Garbage Collection">Garbage Collection</option>
+                <option value="Road Repair">Road Repair</option>
+                <option value="Street Lighting Maintenance">Street Lighting Maintenance</option>
+                <option value="Sewer Cleaning">Sewer Cleaning</option>
+                <option value="Water Supply Maintenance">Water Supply Maintenance</option>
+                <option value="Pothole Repair">Pothole Repair</option>
+                <option value="Park Maintenance">Park Maintenance</option>
+                <option value="Tree Trimming">Tree Trimming</option>
+                <option value="Public Transportation">Public Transportation</option>
+                <option value="Traffic Signal Maintenance">Traffic Signal Maintenance</option>
+            </select>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <script>
+        // Geocode the area name and service address and update hidden latitude and longitude fields
+        const areaNameInput = document.getElementById('area_name');
+        const serviceAddressInput = document.getElementById('service_address');
+        const latitudeInput = document.getElementById('latitude');
+        const longitudeInput = document.getElementById('longitude');
+
+        const geocoder = new google.maps.Geocoder();
+
+        // Function to geocode address and update latitude and longitude fields
+        function geocodeAddress() {
+            const address = areaNameInput.value || serviceAddressInput.value;
+            geocoder.geocode({ 'address': address }, function(results, status) {
+                if (status === 'OK') {
+                    const location = results[0].geometry.location;
+                    latitudeInput.value = location.lat();
+                    longitudeInput.value = location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        // Trigger geocoding when form is submitted
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            geocodeAddress();
+            this.submit();
+        });
+    </script>
+</body>
+</html>
